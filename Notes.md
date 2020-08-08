@@ -152,3 +152,55 @@ rqt_plot命令可以实时显示一个发布到某个话题上的数据变化图
 $ rosrun rqt_plot rqt_plot
 ```
 
+## 服务
+rosservice可以很轻松的使用 ROS 客户端/服务器框架提供的服务。指令和话题的有些类似：
+```shell
+$ rosservice list
+# 罗列提供的服务
+$ rosservice type [service]
+# 查看某一个服务的类型，服务的类型为空（empty),这表明在调用这个服务是不需要参数
+$ rosservice call [service] [args]
+# 使用命令调用服务
+```
+
+## 参数
+rosparam使得我们能够存储并操作ROS 参数服务器（Parameter Server）上的数据。参数服务器能够存储整型、浮点、布尔、字符串、字典和列表等数据类型。rosparam使用YAML标记语言的语法。一般而言，YAML的表述很自然：1 是整型, 1.0 是浮点型, one是字符串, true是布尔, [1, 2, 3]是整型列表, {a: b, c: d}是字典。 rosparam用来操作参数的指令如下：
+```shell
+$ rosparam set [param_name] [value]           
+# 设置参数，设置成功之后需要调用清除服务来使得修改后的参数生效。
+$ rosparam get [param_name]           
+# 获取参数
+$ rosparam load [file_name] [namespace]       
+# 从文件读取参数
+$ rosparam dump [file_name]         
+# 向文件中写入参数
+$ rosparam delete         
+# 删除参数
+$ rosparam list
+# 列出参数名
+```
+
+## 控制台与日志
+rqt_console属于ROS日志框架(logging framework)的一部分，用来显示节点的输出信息。rqt_logger_level允许我们修改节点运行时输出信息的日志等级（logger levels）（包括 DEBUG、WARN、INFO和ERROR）。
+```shell
+$ rosrun rqt_console rqt_console
+# 运行rqt_console
+$ rosrun rqt_logger_level rqt_logger_level
+# 运行rqt_logger_level
+```
+日志等级按以下优先顺序排列：
+| Fatal | Error | Warn | Info | Debug |
+| --- | --- | --- | --- | --- |
+
+Fatal是最高优先级，Debug是最低优先级。通过设置日志等级你可以获取该等级及其以上优先等级的所有日志消息。比如，将日志等级设为Warn时，你会得到Warn、Error和Fatal这三个等级的所有日志消息。
+roslaunch可以用来启动定义在launch文件中的多个节点。
+```shell
+$ roslaunch [package] [filename.launch]
+# 这个指令可以和launch文件进行互动
+```
+以下是launch文件的信息：
+以launch标签开头以表明这是一个launch文件，标签的写法是&lt;launch&gt;，使用尖括号，结束标签为&lt;/launch&gt;。
+在launch文件中可以使用命名空间，简写为ns。
+[详细讲解](http://wiki.ros.org/cn/ROS/Tutorials/UsingRqtconsoleRoslaunch#CA-91a3946a9c4cf7301bb55ec0c3f8a77f6c8f9777_1)
+
+

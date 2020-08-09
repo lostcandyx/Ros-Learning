@@ -203,4 +203,24 @@ $ roslaunch [package] [filename.launch]
 在launch文件中可以使用命名空间，简写为ns。
 [详细讲解](http://wiki.ros.org/cn/ROS/Tutorials/UsingRqtconsoleRoslaunch#CA-91a3946a9c4cf7301bb55ec0c3f8a77f6c8f9777_1)
 
+## 编辑ROS中的文件
+rosed 是 rosbash 的一部分。利用它可以直接通过package名来获取到待编辑的文件而无需指定该文件的存储路径了。
+```shell
+$ rosed [package_name] [filename]
+# 默认使用vim编辑器编辑文件
+$ export EDITOR='emacs -nw'
+# 设置emacs为默认编辑器
+```
+
+## 创建ROS消息和ROS服务
+- 消息(msg): msg文件就是一个描述ROS中所使用消息类型的简单文本。它们会被用来生成不同语言的源代码。放在package的msg目录下。
+- 服务(srv): 一个srv文件描述一项服务。它包含两个部分：请求和响应。存放在srv目录下。
+msg文件实际上就是每行声明一个数据类型和变量名。可以使用的数据类型如下：
+- int8, int16, int32, int64 (plus uint*)
+- float32, float64
+- string
+- time, duration
+- other msg files
+- variable-length array[] and fixed-length array[C]
+
 

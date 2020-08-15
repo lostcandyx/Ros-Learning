@@ -223,4 +223,27 @@ msg文件实际上就是每行声明一个数据类型和变量名。可以使�
 - other msg files
 - variable-length array[] and fixed-length array[C]
 
+下面是一个msg文件的样例，它使用了Header，string，和其他另外两个消息类型。
+```
+  Header header
+  string child_frame_id
+  geometry_msgs/PoseWithCovariance pose
+  geometry_msgs/TwistWithCovariance twist
+```
+srv文件分为请求和响应两部分，由'---'分隔。下面是srv的一个样例：
+```
+int64 A
+int64 B
+---
+int64 Sum
+```
+其中 A 和 B 是请求，而Sum是响应。
+
+## 消息发布器和订阅器 (C++)
+文件的说明见同文件夹下的`talker.cpp`。
+
+## 关于回调函数
+回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
+回调方法 是 任何一个 被 以该回调方法为其第一个参数 的 其它方法 调用 的方法。很多时候，回调是一个当某些事件发生时被调用的方法。
+
 
